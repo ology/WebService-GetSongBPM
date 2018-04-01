@@ -112,7 +112,7 @@ Create a new C<WebService::GetSongBPM> object.
 
 =head2 fetch()
 
-  $r = $w->fetch(%arguments);
+  $r = $w->fetch();
 
 Fetch the results and return them as a HashRef.
 
