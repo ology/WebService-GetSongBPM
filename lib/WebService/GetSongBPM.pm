@@ -179,7 +179,6 @@ sub _handle_response {
 }
 
 1;
-__END__
 
 =head1 SEE ALSO
 
