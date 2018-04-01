@@ -166,7 +166,6 @@ sub _handle_response {
     my $data;
 
     if ( my $res = $tx->success ) {
-        my $body = $res->body;
         $data = decode_json( $res->body );
     }
     else {
