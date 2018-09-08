@@ -1,6 +1,8 @@
 Revision history for WebService-GetSongBPM
 
 {{$NEXT}}
+
+0.0101 2018-04-01 13:46:38
     - Improved documentation.
     - Cleaned up code a bit.
 
