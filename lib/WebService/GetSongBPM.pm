@@ -155,6 +155,7 @@ sub fetch {
     }
 
     my $ua = Mojo::UserAgent->new;
+
     my $tx = $ua->get($url);
 
     my $data = _handle_response($tx);
