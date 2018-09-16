@@ -124,6 +124,7 @@ sub fetch {
     my $type;
     my $lookup;
     my $id;
+
     if ( $self->artist && $self->song ) {
         $type   = 'both';
         $lookup = 'song:' . $self->song . '+artist:' . $self->artist;
@@ -142,6 +143,7 @@ sub fetch {
         unless $type;
 
     my $url = $self->base;
+
     if ( $self->artist_id or $self->song_id ) {
         $url .= "/$type/?api_key=" . $self->api_key
             . "&id=$id";
