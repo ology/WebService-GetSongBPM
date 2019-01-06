@@ -168,14 +168,13 @@ sub _handle_response {
 
     my $data;
 
-    if ( my $res = $tx->success ) {
+    my $res = $tx->result;
+
+    if ( $res->is_success ) {
         $data = decode_json( $res->body );
     }
     else {
-        my $err = $tx->error;
-        croak "$err->{code} response: $err->{message}"
-            if $err->{code};
-        croak "Connection error: $err->{message}";
+        croak "Connection error: ", $res->message;
     }
 
     return $data;
