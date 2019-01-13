@@ -158,11 +158,11 @@ sub fetch {
     my $query = '';
 
     if ( $self->artist_id or $self->song_id ) {
-        $path .= "/$type";
+        $path .= "/$type/";
         $query .= 'api_key=' . $self->api_key . "&id=$id";
     }
     else {
-        $path .= '/search';
+        $path .= '/search/';
         $query .= 'api_key=' . $self->api_key
             . "&type=$type"
             . "&lookup=$lookup";
