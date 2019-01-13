@@ -1,6 +1,7 @@
 Revision history for WebService-GetSongBPM
 
 {{$NEXT}}
+    - Support and test mocking.
 
 0.0200 2019-01-06 16:08:19
     - Use the new tx->result way of things.
