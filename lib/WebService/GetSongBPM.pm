@@ -2,7 +2,7 @@ package WebService::GetSongBPM;
 
 # ABSTRACT: Access to the getsongbpm.com API
 
-our $VERSION = '0.0200';
+our $VERSION = '0.0300';
 
 use Moo;
 use strictures 2;
@@ -12,6 +12,7 @@ use Carp;
 use Mojo::UserAgent;
 use Mojo::JSON::MaybeXS;
 use Mojo::JSON qw( decode_json );
+use Mojo::URL;
 
 =head1 SYNOPSIS
 
@@ -58,8 +59,8 @@ The base URL.  Default: https://api.getsongbpm.com
 =cut
 
 has base => (
-    is      => 'ro',
-    default => sub { 'https://api.getsongbpm.com' },
+    is      => 'rw',
+    default => sub { Mojo::URL->new('https://api.getsongbpm.com') },
 );
 
 =head2 artist
@@ -102,6 +103,17 @@ has song_id => (
     is => 'ro',
 );
 
+=head2 ua
+
+The user agent.
+
+=cut
+
+has ua => (
+    is      => 'rw',
+    default => sub { Mojo::UserAgent->new() },
+);
+
 =head1 METHODS
 
 =head2 new()
@@ -142,21 +154,23 @@ sub fetch {
     croak "Can't fetch: No type set"
         unless $type;
 
-    my $url = $self->base;
+    my $path = '';
+    my $query = '';
 
     if ( $self->artist_id or $self->song_id ) {
-        $url .= "/$type/?api_key=" . $self->api_key
-            . "&id=$id";
+        $path .= "/$type/";
+        $query .= 'api_key=' . $self->api_key . "&id=$id";
     }
     else {
-        $url .= '/search/?api_key=' . $self->api_key
+        $path .= '/search/';
+        $query .= 'api_key=' . $self->api_key
             . "&type=$type"
             . "&lookup=$lookup";
     }
 
-    my $ua = Mojo::UserAgent->new;
+    my $url = Mojo::URL->new($self->base)->path($path)->query($query);
 
-    my $tx = $ua->get($url);
+    my $tx = $self->ua->get($url);
 
     my $data = _handle_response($tx);
 
