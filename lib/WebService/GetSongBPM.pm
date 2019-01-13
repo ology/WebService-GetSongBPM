@@ -2,7 +2,7 @@ package WebService::GetSongBPM;
 
 # ABSTRACT: Access to the getsongbpm.com API
 
-our $VERSION = '0.0200';
+our $VERSION = '0.0300';
 
 use Moo;
 use strictures 2;
@@ -169,7 +169,6 @@ sub fetch {
     }
 
     my $url = Mojo::URL->new($self->base)->path($path)->query($query);
-warn(__PACKAGE__,' ',__LINE__," MARK: $url",,"\n");
 
     my $tx = $self->ua->get($url);
 
