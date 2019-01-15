@@ -2,7 +2,7 @@ package WebService::GetSongBPM;
 
 # ABSTRACT: Access to the getsongbpm.com API
 
-our $VERSION = '0.0300';
+our $VERSION = '0.0301';
 
 use Moo;
 use strictures 2;
