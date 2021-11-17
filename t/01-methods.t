@@ -17,15 +17,14 @@ throws_ok { WebService::GetSongBPM->new }
 
 my $ws = new_ok 'WebService::GetSongBPM' => [ api_key => '1234567890' ];
 
-my $data = try { $ws->fetch } catch { $_; };
-like $data, qr/Can't fetch: No type set/, 'no type set';
+throws_ok { $ws->fetch }
+    qr/Can't fetch: No type set/, 'no type set';
 
-$ws = WebService::GetSongBPM->new(
+$ws = new_ok 'WebService::GetSongBPM' => [
     api_key => '1234567890',
     artist  => 'van halen',
     song    => 'jump',
-);
-isa_ok $ws, 'WebService::GetSongBPM';
+];
 
 my $mock = Mojolicious->new;
 $mock->log->level('fatal'); # only log fatal errors to keep the server quiet
@@ -43,7 +42,7 @@ $ws->base(Mojo::URL->new(''));
 
 can_ok $ws, 'fetch';
 
-$data = try { $ws->fetch } catch { $_; };
+my $data = try { $ws->fetch } catch { $_; };
 is_deeply $data, {ok => 1}, 'fetch';
 
 done_testing();
