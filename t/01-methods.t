@@ -15,8 +15,7 @@ use_ok 'WebService::GetSongBPM';
 throws_ok { WebService::GetSongBPM->new }
     qr/Missing required arguments: api_key/, 'api_key required';
 
-my $ws = WebService::GetSongBPM->new(api_key => '1234567890');
-isa_ok $ws, 'WebService::GetSongBPM';
+my $ws = new_ok 'WebService::GetSongBPM' => [ api_key => '1234567890' ];
 
 my $data = try { $ws->fetch } catch { $_; };
 like $data, qr/Can't fetch: No type set/, 'no type set';
