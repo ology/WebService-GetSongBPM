@@ -33,7 +33,7 @@ $mock->routes->get('/search' => sub {
     is $c->param('api_key'), '1234567890', 'api_key param';
     is $c->param('type'), 'both', 'type param';
     is $c->param('lookup'), 'song:jump+artist:van halen', 'lookup param';
-    return $c->render(status => 200, json => {ok => 1});
+    return $c->render(status => 200, json => { ok => 1 });
 });
 $ws->ua->server->app($mock); # point our UserAgent to our new mock server
 
