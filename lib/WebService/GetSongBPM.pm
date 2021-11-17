@@ -61,7 +61,7 @@ The base URL.  Default: https://api.getsongbpm.com
 
 has base => (
     is      => 'rw',
-    default => sub { Mojo::URL->new('https://api.getsongbpm.com') },
+    default => sub { 'https://api.getsongbpm.com' },
 );
 
 =head2 artist
@@ -155,18 +155,23 @@ sub fetch {
     croak "Can't fetch: No type set"
         unless $type;
 
-    my $path = '';
-    my $query = '';
+    my $path  = '';
+    my $query = {};
 
     if ( $self->artist_id or $self->song_id ) {
-        $path .= "/$type/";
-        $query .= 'api_key=' . $self->api_key . "&id=$id";
+        $path .= $type;
+        $query = {
+            api_key => $self->api_key,
+            id      => $id,
+        };
     }
     else {
-        $path .= '/search/';
-        $query .= 'api_key=' . $self->api_key
-            . "&type=$type"
-            . "&lookup=$lookup";
+        $path .= 'search';
+        $query = {
+            api_key => $self->api_key,
+            type    => $type,
+            lookup  => $lookup,
+        };
     }
 
     my $url = Mojo::URL->new($self->base)->path($path)->query($query);
