@@ -1,6 +1,8 @@
 Revision history for WebService-GetSongBPM
 
 {{$NEXT}}
+    - Fix query logic.
+    - Improve tests.
 
 0.0302 2019-05-04 20:07:37
     - Attempt to decode the JSON in a try-catch block.
