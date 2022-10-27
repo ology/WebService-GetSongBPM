@@ -2,7 +2,7 @@ package WebService::GetSongBPM;
 
 # ABSTRACT: Access to the getsongbpm.com API
 
-our $VERSION = '0.0400';
+our $VERSION = '0.0401';
 
 use strictures 2;
 use Carp qw(croak);
