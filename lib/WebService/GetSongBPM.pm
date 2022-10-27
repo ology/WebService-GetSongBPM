@@ -4,16 +4,14 @@ package WebService::GetSongBPM;
 
 our $VERSION = '0.0400';
 
-use Moo;
 use strictures 2;
-use namespace::clean;
-
-use Carp;
-use Mojo::UserAgent;
-use Mojo::JSON::MaybeXS;
-use Mojo::JSON qw( decode_json );
-use Mojo::URL;
+use Carp qw(croak);
+use Mojo::UserAgent ();
+use Mojo::JSON qw(decode_json);
+use Mojo::URL ();
+use Moo;
 use Try::Tiny;
+use namespace::clean;
 
 =head1 SYNOPSIS
 
